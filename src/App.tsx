@@ -1,21 +1,21 @@
 import { Routes, Route } from "react-router-dom";
-import { DashboardLayout } from "./layouts/DashboardLayout";
-import { DashboardPage } from "./pages/DashboardPage";
-
-function Placeholder({ title }: { title: string }) {
-  return <h2>{title}</h2>;
-}
+import DashboardPage from "./pages/DashboardPage";
+import { LoginPage } from "./pages/LoginPage";
+import { SignUpPage } from "./pages/SignUpPage";
+import DashboardLayout from "./layouts/DashboardLayout";
 
 function App() {
   return (
-    <DashboardLayout>
-      <Routes>
+    <Routes>
+      <Route path="/login" element={<LoginPage />} />
+      <Route path="/signUp" element={<SignUpPage />} />
+
+      <Route element={<DashboardLayout />}>
         <Route path="/" element={<DashboardPage />} />
-        <Route path="/orders" element={<Placeholder title="Orders Page" />} />
-        <Route path="/settings" element={<Placeholder title="Settings Page" />} />
-      </Routes>
-    </DashboardLayout>
-  );
+      </Route>
+      
+    </Routes>
+  )
 }
 
 export default App;

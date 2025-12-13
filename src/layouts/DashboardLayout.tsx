@@ -1,4 +1,4 @@
-import type { ReactNode } from "react";
+import { Outlet, Link } from "react-router-dom"
 
 import {
   Box,
@@ -9,75 +9,22 @@ import {
   AppBar,
   Toolbar,
   Typography,
+  Button
 } from "@mui/material";
 
-import { Link, useLocation } from "react-router-dom";
-
-const drawerWidth = 220;
-
-interface DashboardLayoutProps {
-  children: ReactNode;
-}
-
-const navItems = [
-  { label: "Dashboard", path: "/" },
-  { label: "Orders", path: "/orders" },
-  { label: "Settings", path: "/settings" },
-];
-
-export function DashboardLayout({ children }: DashboardLayoutProps) {
-  const location = useLocation();
-
+export default function DashboardLayout() {
   return (
-    <Box sx={{ display: "flex" }}>
-      {/* Sidebar */}
-      <Drawer
-        variant="permanent"
-        sx={{
-          width: drawerWidth,
-          [`& .MuiDrawer-paper`]: {
-            width: drawerWidth,
-            boxSizing: "border-box",
-          },
-        }}
-      >
-        <Toolbar>
-          <Typography variant="h6" noWrap>
-            My Dashboard
-          </Typography>
+    <>
+      <AppBar position="static">
+        <Toolbar sx={{ justifyContent: "space-between" }}>
+          <Typography>Dashboard</Typography>
+          <Button color="inherit" component={Link} to="/login">Login</Button>
         </Toolbar>
-        <List>
-          {navItems.map((item) => (
-            <ListItemButton
-              key={item.path}
-              component={Link}
-              to={item.path}
-              selected={location.pathname === item.path}
-            >
-              <ListItemText primary={item.label} />
-            </ListItemButton>
-          ))}
-        </List>
-      </Drawer>
+      </AppBar>
 
-      {/* Main content */}
-      <Box sx={{ flexGrow: 1, ml: `${drawerWidth}px` }}>
-        <AppBar
-          position="fixed"
-          sx={{ ml: `${drawerWidth}px`, width: `calc(100% - ${drawerWidth}px)` }}
-        >
-          <Toolbar>
-            <Typography variant="h6" noWrap>
-              Welcome back 👋
-            </Typography>
-          </Toolbar>
-        </AppBar>
-
-        <Toolbar /> {/* pushes content below AppBar */}
-        <Box component="main" sx={{ p: 3 }}>
-          {children}
-        </Box>
-      </Box>
-    </Box>
-  );
+      <main>
+        <Outlet />
+      </main>
+    </>
+  )
 }
