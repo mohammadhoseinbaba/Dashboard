@@ -25,7 +25,7 @@ const series = [
     valueFormatter: percentageFormatter,
   },
 ];
-export  function SaleChart() {
+export  function SalesChart() {
   return (
     <LineChart
       dataset={usUnemploymentRate}
