@@ -3,7 +3,7 @@ export default function DashboardPage() {
   return (
     <>
       <div>
-        <div>Hello from dashboardPage</div>
+        <div>First you need to be Login to see the Media !</div>
       </div>
     </>
   )

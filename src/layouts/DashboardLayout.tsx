@@ -56,12 +56,12 @@ export default function DashboardLayout() {
             <Button color="inherit" component={Link} to="/login">Login</Button>
           </Toolbar>
         </AppBar>
-      </Box>
 
 
-      <main>
-        <Outlet />
-      </main>
+      <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
+          <Outlet />
+        </Box>
+      </Box>  
     </>
   )
 }

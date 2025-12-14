@@ -1,7 +1,7 @@
 import { Routes, Route } from "react-router-dom";
 import DashboardPage from "./pages/DashboardPage";
-import { LoginPage } from "./pages/LoginPage";
-import { SignUpPage } from "./pages/SignUpPage";
+import LoginPage from "./pages/LoginPage";
+import SignUpPage from "./pages/SignUpPage";
 import DashboardLayout from "./layouts/DashboardLayout";
 
 function App() {
@@ -13,7 +13,7 @@ function App() {
       <Route element={<DashboardLayout />}>
         <Route path="/" element={<DashboardPage />} />
       </Route>
-      
+
     </Routes>
   )
 }
