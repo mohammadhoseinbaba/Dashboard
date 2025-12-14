@@ -21,13 +21,15 @@ import LightModeIcon from "@mui/icons-material/LightMode";
 interface MenuItem {
   id: number;
   title: string;
+  path: string;
 }
 
 const listMenuLeft: MenuItem[] = [
-  { id: 0, title: "menu" },
-  { id: 1, title: "sale dashboard" },
-  { id: 2, title: "setting" },
-  { id: 3, title: "logout" },
+  { id: 0, title: "Menu", path: "/" },
+  { id: 1, title: "Sale dashboard", path: "/sales" },
+  { id: 2, title: "Tasks", path: "/Tasks" },
+  { id: 3, title: "Setting", path: "/settings" },
+  { id: 4, title: "Logout", path: "/logout" },
 ];
 
 export default function DashboardLayout() {
@@ -52,7 +54,7 @@ export default function DashboardLayout() {
         <Toolbar />
         <List>
           {listMenuLeft.map((item) => (
-            <ListItemButton key={item.id}>
+            <ListItemButton key={item.id} component={Link} to={item.path}>
               <ListItemText primary={item.title} />
             </ListItemButton>
           ))}
