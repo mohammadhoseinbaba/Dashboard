@@ -36,10 +36,21 @@ export default function TaskPage() {
         setValue('')
     }
 
+
+    const toggleDone = (id: number) => {
+        setTasks((prev) =>
+            prev.map((t) => t.id === id ? { ...t, done: !t.done } : t))
+    }
+
+    const handleDelete = (id: number) => {
+        setTasks((prev) => prev.filter((t) => t.id !== id))
+    }
+
     const renderedTask = tasks.map((item) => (
         <div key={item.id}>
             <span>{item.title}</span>
-            <button>Delete</button>
+            <input type="checkbox" checked={item.done} onChange={() => toggleDone(item.id)} />
+            <button onClick={() => handleDelete(item.id)}>Delete</button>
         </div>
     ))
 
