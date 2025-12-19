@@ -1,6 +1,6 @@
 import React from "react";
 import { Outlet, Link } from "react-router-dom";
-import { ColorModeContext } from "../main"; // ✅ adjust path if needed
+import { ColorModeContext } from "../main"; 
 
 import {
   Box,
