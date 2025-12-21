@@ -1,6 +1,7 @@
 import React from "react";
-import { Outlet, Link } from "react-router-dom";
-import { ColorModeContext } from "../main"; 
+import { Outlet, Link as RouterLink } from "react-router-dom";
+import { ColorModeContext } from "../main";
+import { useAuthStore } from "../store/authStore";
 
 import {
   Box,
@@ -35,6 +36,8 @@ const listMenuLeft: MenuItem[] = [
 export default function DashboardLayout() {
   const drawerWidth = 240;
 
+  const user = useAuthStore((s) => s.user)
+
   const { mode, toggle } = React.useContext(ColorModeContext);
 
   return (
@@ -54,7 +57,7 @@ export default function DashboardLayout() {
         <Toolbar />
         <List>
           {listMenuLeft.map((item) => (
-            <ListItemButton key={item.id} component={Link} to={item.path}>
+            <ListItemButton key={item.id} component={RouterLink} to={item.path}>
               <ListItemText primary={item.title} />
             </ListItemButton>
           ))}
@@ -70,9 +73,16 @@ export default function DashboardLayout() {
               {mode === "dark" ? <LightModeIcon /> : <DarkModeIcon />}
             </IconButton>
 
-            <Button color="inherit" component={Link} to="/login">
-              Login
-            </Button>
+            {user ?
+              <Typography color="inherit">
+                {user.name}
+              </Typography>
+              :
+              <Button color="inherit" component={RouterLink} to="/login">
+                Login
+              </Button>
+            }
+
           </Box>
         </Toolbar>
       </AppBar>

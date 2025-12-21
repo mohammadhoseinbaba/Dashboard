@@ -38,7 +38,7 @@ function Root() {
   return (
     <React.StrictMode>
       <ColorModeContext.Provider value={{ mode, toggle }}>
-        <QueryClientProvider client={queryClient}>
+          <QueryClientProvider client={queryClient}>
           <BrowserRouter>
             <ThemeProvider theme={theme}>
               <CssBaseline />
