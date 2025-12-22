@@ -174,8 +174,8 @@ export default function LoginPage() {
         }}
 
         signIn={async (_provider, formData) => {
-          setError(null);
-          setLoading(true);
+            setError(null);
+            setLoading(true);
 
           try {
             const email = String(formData.get("email") ?? "");
