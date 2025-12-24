@@ -192,7 +192,7 @@ export default function LoginPage() {
             const message = getApiErrorMessage(e);
             setError(message);
 
-            return { status: "error", error: message };
+            return { status: "error",   error: message };
           } finally {
             setLoading(false);
           }

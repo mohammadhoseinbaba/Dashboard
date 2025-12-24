@@ -1,5 +1,5 @@
 import React from "react";
-import { Outlet, Link as RouterLink } from "react-router-dom";
+import { useNavigate, Outlet, Link as RouterLink } from "react-router-dom";
 import { ColorModeContext } from "../main";
 import { useAuthStore } from "../store/authStore";
 
@@ -30,13 +30,14 @@ const listMenuLeft: MenuItem[] = [
   { id: 1, title: "Sale dashboard", path: "/sales" },
   { id: 2, title: "Tasks", path: "/Tasks" },
   { id: 3, title: "Setting", path: "/settings" },
-  { id: 4, title: "Logout", path: "/logout" },
 ];
 
 export default function DashboardLayout() {
   const drawerWidth = 240;
 
   const user = useAuthStore((s) => s.user)
+  const clearAuth = useAuthStore((s) => s.clearAuth)
+  const navigate = useNavigate()
 
   const { mode, toggle } = React.useContext(ColorModeContext);
 
@@ -61,6 +62,16 @@ export default function DashboardLayout() {
               <ListItemText primary={item.title} />
             </ListItemButton>
           ))}
+          {/* Logout action */}
+
+          <ListItemButton
+            onClick={() => {
+              clearAuth();
+              navigate("/login", { replace: true });
+            }}
+          >
+            <ListItemText primary="Logout" />
+          </ListItemButton>
         </List>
       </Drawer>
 
