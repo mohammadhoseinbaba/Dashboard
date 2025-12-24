@@ -12,11 +12,14 @@ export const http = axios.create({
 });
 
 // --- Token handling (simple) ---
-let accessToken: string | null = null;
+let accessToken: string | null = localStorage.getItem("accessToken");
 
 export function setAccessToken(token: string | null) {
   accessToken = token;
+  if (token) localStorage.setItem("accessToken", token);
+  else localStorage.removeItem("accessToken");
 }
+
 
 export function getAccessToken() {
   return accessToken;
