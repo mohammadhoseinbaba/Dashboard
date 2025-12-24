@@ -6,6 +6,7 @@ import DashboardLayout from "./layouts/DashboardLayout";
 import SaleDashboardPage from "./pages/SaleDashboardPage";
 import TaskPage from "./pages/TaskPage";
 import SettingPage from "./pages/SettingPage";
+import ProtectedRoute from "./routes/ProtectedRoute";
 
 function App() {
   return (
@@ -13,13 +14,15 @@ function App() {
       <Route path="/login" element={<LoginPage />} />
       <Route path="/signUp" element={<SignUpPage />} />
 
-      <Route element={<DashboardLayout />}>
-        <Route path="/" element={<DashboardPage />} />
-        <Route path="/sales" element={<SaleDashboardPage />} />
-        <Route path="/Tasks" element={<TaskPage />} />
-        <Route path="/Settings" element={<SettingPage />} />
+      <Route element={<ProtectedRoute />}>
+        <Route element={<DashboardLayout />}>
+          <Route path="/" element={<DashboardPage />} />
+          <Route path="/sales" element={<SaleDashboardPage />} />
+          <Route path="/Tasks" element={<TaskPage />} />
+          <Route path="/Settings" element={<SettingPage />} />
+        </Route>
       </Route>
-
+      <Route path="*" element={<div>Not Found 404</div>} />
     </Routes>
   )
 }
