@@ -33,6 +33,19 @@ http.interceptors.request.use((config) => {
   }
   return config;
 });
+//clean the local storge and memory from expired token
+http.interceptors.response.use(
+  (res) => res,
+  (error) => {
+    if (error.response?.status === 401) {
+      setAccessToken(null);
+
+      // force redirect to login
+      window.location.href = "/login";
+    }
+    return Promise.reject(error);
+  }
+);
 
 // Optional: normalize errors
 export function getApiErrorMessage(err: unknown): string {
