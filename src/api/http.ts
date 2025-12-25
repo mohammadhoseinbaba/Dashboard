@@ -37,15 +37,24 @@ http.interceptors.request.use((config) => {
 http.interceptors.response.use(
   (res) => res,
   (error) => {
-    if (error.response?.status === 401) {
+    const status = error.response?.status;
+    const url = error.config?.url ?? "";
+
+    const isAuthRoute =
+      url.includes("/auth/login") || url.includes("/auth/register");
+
+    if (status === 401 && !isAuthRoute) {
       setAccessToken(null);
 
-      // force redirect to login
-      window.location.href = "/login";
+      if (window.location.pathname !== "/login") {
+        window.location.replace("/login");
+      }
     }
+
     return Promise.reject(error);
   }
 );
+
 
 // Optional: normalize errors
 export function getApiErrorMessage(err: unknown): string {
